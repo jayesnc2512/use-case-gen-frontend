@@ -10,12 +10,16 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import InfoBox from '../component/InfoBox';
 import Checkbox from '@material-ui/core/Checkbox';
+import Oauth from './Oauth';
+
 
 export default function Home() {
     let history = useHistory();
     const [state, setstate] = useContext(Context);
     const [error, seterror] = useState(false)
     const [errorMsg, seterrorMsg] = useState('')
+    const [authDone,setAuthDone]=useState(false);
+
 
     useEffect(() => {
         // getApiData()
@@ -67,13 +71,20 @@ export default function Home() {
         setstate({...state,userInfo:{...state.userInfo,agree:e.target.checked}})
     }
 
+    const authCheck=((profileObj)=>{
+        setAuthDone(!authDone);
+        // alert(profileObj.name);
+        setstate({ ...state, userInfo: { ...state.userInfo, user: profileObj.name } });
+    });
+
     return (
         <div className="home">
             <Card className="user-info-card">
+                {!authDone ? <Oauth authCheck={authCheck}/> :<>
                 <h2 className='card-head'>User Details</h2>
-                <TextField id="standard-basic" className="input-width" name="user" value={state.userInfo.user} label="Name" onChange={handleChange} />
+                {/* <TextField id="standard-basic" className="input-width" name="user" value={state.userInfo.user} label="Name" onChange={handleChange} /> */}
                 <TextField id="standard-basic" className="input-width" name="name_org" value={state.userInfo.name_org} label="Organisation Name" onChange={handleChange} />
-                <FormControl className="input-width">
+                <FormControl className="input-width">                  
                     <InputLabel id="demo-simple-select-label">Role in the network</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -81,6 +92,7 @@ export default function Home() {
                         value={state.userInfo.name_role_timestamp}
                         name="name_role_timestamp"
                         onChange={handleChange}
+                        className='input-width'
                     >
                         <MenuItem value='Retail BAP'>Retail BAP</MenuItem>
                         <MenuItem value='Retail BPP'>Retail BPP</MenuItem>
@@ -99,6 +111,7 @@ export default function Home() {
                     proceed
                 </Button>
                 {error ? <div className="error-text">{errorMsg}</div> : ''}
+    </>}
             </Card>
             <InfoBox keyName='home' />
         </div>

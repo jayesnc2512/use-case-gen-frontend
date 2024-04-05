@@ -14,9 +14,10 @@ import OnInit from './pages/OnInit';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route,  
   Link
 } from "react-router-dom";
+import { useState,useEffect } from 'react';
 import Confirm from './pages/Confirm';
 import OnConfirm from './pages/OnConfirm';
 import Status from './pages/Status';
@@ -33,9 +34,14 @@ import Support from './pages/Support';
 import OnSupport from './pages/OnSupport';
 import Graph from './pages/Graph';
 import CombineCsv from './pages/CombineCsv';
+import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
+
+
   return (
+    <AuthProvider>
     <Store className="App">
       <Header />
       <Router>
@@ -46,8 +52,8 @@ function App() {
             </Route>
             <Route path="/onsupport">
               <OnSupport />
-            </Route>
-            <Route path="/support">
+`            </Route>
+`            <Route path="/support">
               <Support />
             </Route>
             <Route path="/onrating">
@@ -114,6 +120,7 @@ function App() {
         </div>
       </Router>
     </Store>
+    </AuthProvider>
   );
 }
 
