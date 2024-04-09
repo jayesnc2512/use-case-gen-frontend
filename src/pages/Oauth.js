@@ -57,7 +57,7 @@ export default function Oauth(props) {
         console.log("login successful",res.profileObj);
         var accessToken=await gapi.auth.getToken().access_token;
         setProfile(res.profileObj);
-        await Cookies.set('accessToken', res.tokenObj.access_token); // Expires in 1 hour
+        await Cookies.set('profileObj', res.tokenObj); // Expires in 1 hour
         authCheck(res.profileObj);
         setAccessToken(res.tokenObj.access_token);
     }

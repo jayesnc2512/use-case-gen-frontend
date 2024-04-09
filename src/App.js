@@ -34,6 +34,7 @@ import Support from './pages/Support';
 import OnSupport from './pages/OnSupport';
 import Graph from './pages/Graph';
 import CombineCsv from './pages/CombineCsv';
+import Logout from './component/Logout';
 import { AuthProvider } from './context/AuthContext';
 
 
@@ -47,6 +48,9 @@ function App() {
       <Router>
         <div>
           <Switch>
+          <Route path="/logout">
+            <Logout />                
+            </Route>  
             <Route path="/graph">
               <Graph />
             </Route>

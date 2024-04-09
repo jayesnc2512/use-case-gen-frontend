@@ -1,3 +1,4 @@
+import React from "react";
 import { GoogleLogout } from "react-google-login";
 import '../App.css';
 import Cookies from 'js-cookie';
@@ -19,9 +20,9 @@ export default function Logout() {
 
     const onSuccess=async(res)=>{
         console.log("Logged Out",res);
-        alert('Logged Out');
-        await Cookies.remove('accessToken'); // Delete the 'accessToken' cookie
-        setAccessToken('');
+        alert('Logged Out')
+        await Cookies.remove('accessToken') // Delete the 'accessToken' cookie
+        setAccessToken('')
         history.push("/");
     }
 

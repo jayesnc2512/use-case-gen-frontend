@@ -7,8 +7,10 @@ import Card from '@material-ui/core/Card';
 import InfoBox from './InfoBox';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import Cookie from 'js-cookie';
 
-export default function CheckBoxSelector(props) {
+
+export default  function CheckBoxSelector(props) {
     let history = useHistory();
     const [state, setstate] = useContext(Context);
     console.log(props);
@@ -16,6 +18,8 @@ export default function CheckBoxSelector(props) {
         console.log(event.target.name, index, index2);
         state.apiFilterData[props.keyName][index][index2].checked = event.target.checked;
         setstate({ ...state, apiFilterData: { ...state.apiFilterData, [props.keyName]: state.apiFilterData[props.keyName] } })
+        console.log("state",state);
+        // Expires in 1 hour
     }
 
 
